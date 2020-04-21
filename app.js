@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
 	res.render('index')
 })
 
+app.post('/', (req, res) => {
+	res.render('index')
+})
+
 app.listen(port, hostname, () => {
 	console.log(`The Server is running on http://${hostname}:${port}`)
 })
