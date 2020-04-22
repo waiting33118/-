@@ -1,7 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const app = express()
-const hostname = `192.168.1.112`
+const hostname = `localhost`
 const port = 3000
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
