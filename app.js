@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const generatePassword = require('./generate_password')
 const app = express()
 const hostname = `localhost`
 const port = 3000
@@ -14,8 +15,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-	console.log(req.body)
-	res.render('index')
+	const options = req.body
+	const password = generatePassword(options)
+	res.render('index', { password: password, options: options })
 })
 
 app.listen(port, hostname, () => {
