@@ -1,41 +1,43 @@
-function generatePassword() {
+function generateSingleNum(collection) {
+	const index = Math.floor(Math.random() * collection.length)
+	return collection[index]
+}
+
+function generatePassword(options) {
 	const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
 	const upperCaseLetters = lowerCaseLetters.toUpperCase()
-	const number = '1234567890'
+	const numbers = '1234567890'
 	const symbols = '`~!@$%^&*()-_+={}[]|;:"<>,.?/'
 
-	const options = {
-		length: 12,
-		lowercase: 'on',
-		uppercase: 'on',
-		number: 'on',
-		excludeCharacters: '40',
-	}
-
 	let collection = []
-
 	if (options.lowercase === 'on') {
 		collection.push(...lowerCaseLetters)
 	}
 	if (options.uppercase === 'on') {
 		collection.push(...upperCaseLetters)
 	}
-	if (options.number === 'on') {
-		collection.push(...number)
+	if (options.numbers === 'on') {
+		collection.push(...numbers)
 	}
 	if (options.symbols === 'on') {
 		collection.push(...symbols)
 	}
-
 	if (options.excludeCharacters) {
 		collection = collection.filter(
 			(char) => !options.excludeCharacters.includes(char)
 		)
 	}
 
-	console.log(collection)
+	if (collection.length === 0) {
+		return '請 1)勾選選項 2)檢查排除字元是否衝突'
+	}
 
-	console.log('This function will generate password')
+	//根據字串長度連續抽出
+	let password = ''
+	for (let i = 1; i <= options.length; i++) {
+		password += generateSingleNum(collection)
+	}
+	return password
 }
 
-generatePassword()
+module.exports = generatePassword
